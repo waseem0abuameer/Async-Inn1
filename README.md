@@ -1,4 +1,6 @@
 # Async-Inn
+##  Lab: 11 - Relational Databases
+
 in this system, i have 5 table 
 ## Hotel
 
@@ -51,3 +53,22 @@ Features in the room
 Features in each room alone
 
 ![](/img/120.png)
+
+
+==============================================================================================================================
+## Lab: 12 - Intro to Entity Framework
+
+in tis lap i make my first app in Asp core and this my resulets
+
+
+### Hotel
+
+![](/img/Hotel.png)
+
+### Room
+
+![](/img/Room.png)
+
+###  Amenities
+
+![](/img/Amenities.png)
