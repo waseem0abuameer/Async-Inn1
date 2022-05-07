@@ -55,7 +55,7 @@ Features in each room alone
 ![](/img/120.png)
 
 
-==============================================================================================================================
+=======================================================================================================
 ## Lab: 12 - Intro to Entity Framework
 
 in tis lap i make my first app in Asp core and this my resulets
@@ -72,3 +72,30 @@ in tis lap i make my first app in Asp core and this my resulets
 ###  Amenities
 
 ![](/img/Amenities.png)
+
+==================================================================================
+## Lab 13: Dependency Injection & Repository Design Pattern
+1. in this lap i Using Dependency Injection,refactor your Hotels, Rooms, and Amenities Controllers to depend on an interface rather than the DbContext
+2. Build an interface for each of the controllers that contain the required method signatures to all for CRUD operations to the database directly.
+3. Update each of the controllers to inject the interface rather than the DBContext.
+4. Create a service for each of the controllers that implement the appropriate interface. Build out the logic to satisfy the interface by making the appropriate calls to the db for each action.
+5.  Update your Controller to use the appropriate method from the interface rather than the DBContext directly.
+6. Confirm in POSTMAN that your controllers are returning the same logic as they did in Lab 12.
+
+# all this image after the Injection
+### Hotel
+
+![](/img/getHotel.png)
+
+### Room
+
+![](/img/getRoom.png)
+
+###  Amenities
+
+![](/img/getAmenities.png)
+
+
+
+## Test Post
+![](/img/postRoom.png)
