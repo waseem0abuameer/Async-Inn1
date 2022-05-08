@@ -26,7 +26,7 @@ namespace Async_Inn_Management_System
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson(opt=>opt.SerializerSettings.ReferenceLoopHandling=Newtonsoft.Json.ReferenceLoopHandling.Ignore);
             services.AddDbContext<HotelDbContext>(options => {
                 // Our DATABASE_URL from js days
                 string connectionString = Configuration.GetConnectionString("DefaultConnection");
@@ -35,6 +35,7 @@ namespace Async_Inn_Management_System
             services.AddTransient<IHotel, HotelRepository > ();
             services.AddTransient<IRoom, RoomRepository>();
             services.AddTransient<IAmenity, AmenityRepository>();
+           services.AddTransient<IHotelRoom, HotelRoomRepository>();
 
         }
 

@@ -32,14 +32,21 @@ namespace Async_Inn_Management_System.Models.Services
 
         public async Task<Hotel> GetHotel(int Id)
         {
-            Hotel hotel = await _context.Hotels.FindAsync(Id);
-            return hotel;
+            //Hotel hotel = await _context.Hotels.FindAsync(Id);
+            //return hotel;
+            return await _context.Hotels
+            .Include(rh => rh.HotelRooms)
+            .ThenInclude(h => h.Room).FirstOrDefaultAsync(x => x.ID == Id);
+
         }
 
         public async Task<List<Hotel>> GetHotels()
         {
-            var hotels = await _context.Hotels.ToListAsync();
-            return hotels;
+            //var hotels = await _context.Hotels.ToListAsync();
+            //return hotels;
+            return await _context.Hotels
+            .Include(rh => rh.HotelRooms)
+            .ToListAsync();
         }
 
         public async Task<Hotel> UpdateHotel(int Id, Hotel hotel)
@@ -48,5 +55,25 @@ namespace Async_Inn_Management_System.Models.Services
             await _context.SaveChangesAsync();
             return hotel;
         }
+        public async Task AddRoomsToHotel(int hotelId , int roomId)
+        {
+            HotelRoom hotelroom = new HotelRoom()
+            {
+                RoomID = roomId,
+                HotelID = hotelId
+            };
+
+            _context.Entry(hotelroom).State = EntityState.Added;
+
+            await _context.SaveChangesAsync();
+        }
+        //public async Task RemoveRoomsToHotel(int roomId, int amenityId)
+        //{
+        //    RoomAmenities roomAmenities = await _context.RoomAmenities.Where(x => x.AmenitiesID == amenityId && x.RoomID == roomId).FirstOrDefaultAsync();
+
+        //    _context.Entry(roomAmenities).State = EntityState.Deleted;
+
+        //    await _context.SaveChangesAsync();
+        //}
     }
 }

@@ -69,7 +69,14 @@ namespace Async_Inn_Management_System.Controllers
             await _hotel.DeleteHotel(id);
             return NoContent();
         }
+        // Add Rooms to Hotel: api/Hotels/5/1
 
-       
+        [HttpPost("{HotelID}/{RoomID}")]
+        public async Task<ActionResult> AddRoomsToHotel(int HotelID,int RoomID)
+        {
+            await _hotel.AddRoomsToHotel(HotelID,RoomID);
+            return NoContent();
+        }
+
     }
 }

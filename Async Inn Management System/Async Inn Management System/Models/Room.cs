@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+
 namespace Async_Inn_Management_System.Models
 {
     public class Room
@@ -12,5 +11,9 @@ namespace Async_Inn_Management_System.Models
         //0 OneBedroom
         //1 TwoBedroom
         //2 Studio
+        public ICollection<HotelRoom> HotelRooms { get; set; }
+        public List<RoomAmenities> RoomAmenities { get; set; }
+
+
     }
 }
