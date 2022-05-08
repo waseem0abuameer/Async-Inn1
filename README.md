@@ -113,3 +113,7 @@ in tis lap i make my first app in Asp core and this my resulets
 
 ![](/img/DTOsHotels.png)
 
+================================================================================================
+## Lab: 18 - Identity
+![](/img/login.png)
+![](/img/Rejest.png)

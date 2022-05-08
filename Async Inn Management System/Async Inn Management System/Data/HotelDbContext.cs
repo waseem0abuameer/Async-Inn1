@@ -1,9 +1,10 @@
 ﻿using Async_Inn_Management_System.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace Async_Inn_Management_System.Data
 {
-    public class HotelDbContext : DbContext
+    public class HotelDbContext : IdentityDbContext<ApplicationUser>
     {
         public DbSet<Hotel> Hotels { get; set; }
         public DbSet<Amenity> Amenities { get; set; }       
@@ -42,9 +43,10 @@ namespace Async_Inn_Management_System.Data
             modelBuilder.Entity<HotelRoom>().HasKey(x => new { x.HotelID, x.RoomID });
             modelBuilder.Entity<RoomAmenities>().HasKey(x => new { x.AmenitiesID, x.RoomID });
 
+                   
 
 
-        }
-
+    }
+        public DbSet<Async_Inn_Management_System.Models.DTOs.UserDTO> UserDTOs { get; set; }
     }
 }
