@@ -8,15 +8,16 @@ using Microsoft.EntityFrameworkCore;
 using Async_Inn_Management_System.Data;
 using Async_Inn_Management_System.Models;
 using Async_Inn_Management_System.Models.Interfaces;
+using Async_Inn_Management_System.Models.DTOs;
 
 namespace Async_Inn_Management_System.Controllers
 {
+    [Produces("application/json")]
     [Route("api/[controller]")]
     [ApiController]
     public class RoomsController : ControllerBase
     {
         private readonly IRoom _room;
-
 
         public RoomsController(IRoom room)
         {
@@ -25,24 +26,25 @@ namespace Async_Inn_Management_System.Controllers
 
         // GET: api/Rooms
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Room>>> GetRooms()
+        public async Task<ActionResult<IEnumerable<RoomDTO>>> GetRooms()
         {
-            return await _room.GetRooms();
+            return Ok(await _room.GetRooms());
         }
 
         // GET: api/Rooms/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Room>> GetRoom(int id)
+        public async Task<ActionResult<RoomDTO>> GetRoom(int id)
         {
             var room = await _room.GetRoom(id);
 
             return Ok(room);
+
         }
 
         // PUT: api/Rooms/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutRoom(int id, Room room)
+        public async Task<IActionResult> PutRoom(int id, RoomDTO room)
         {
             if (id != room.ID)
             {
@@ -56,7 +58,7 @@ namespace Async_Inn_Management_System.Controllers
         // POST: api/Rooms
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Room>> PostRoom(Room room)
+        public async Task<ActionResult<RoomDTO>> PostRoom(RoomDTO room)
         {
             await _room.CreateRoom(room);
             return CreatedAtAction("GetRoom", new { id = room.ID }, room);
@@ -69,13 +71,15 @@ namespace Async_Inn_Management_System.Controllers
             await _room.DeleteRoom(id);
             return NoContent();
         }
+        //Adds an amenity to a room
         [HttpPost]
-        [Route("{roomId}/{amenityId}")]
+        [Route("{roomId}/Amenity/{amenityId}")]
         public async Task<IActionResult> AddAmenityToRoom(int roomId, int amenityId)
         {
             await _room.AddAmenityToRoom(roomId, amenityId);
             return NoContent();
         }
+        //removes an amenity from a room
         [HttpDelete]
         [Route("{roomId}/{amenityId}")]
         public async Task<IActionResult> DeleteAmenityFromRoom(int roomId, int amenityId)

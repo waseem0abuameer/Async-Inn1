@@ -105,3 +105,11 @@ in tis lap i make my first app in Asp core and this my resulets
 ![](/img/Lab14Hotels.png)
 ![](/img/Lab14Room.png)
 ![](/img/HotelRooms.png)
+
+
+
+================================================================================================
+## Lab 16: Data Transfer Objects (DTOs)
+
+![](/img/DTOsHotels.png)
+

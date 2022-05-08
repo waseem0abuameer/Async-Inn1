@@ -8,14 +8,17 @@ using Microsoft.EntityFrameworkCore;
 using Async_Inn_Management_System.Data;
 using Async_Inn_Management_System.Models;
 using Async_Inn_Management_System.Models.Interfaces;
+using Async_Inn_Management_System.Models.DTOs;
 
 namespace Async_Inn_Management_System.Controllers
 {
+    [Produces("application/json")]
     [Route("api/[controller]")]
     [ApiController]
     public class AmenitiesController : ControllerBase
     {
         private readonly IAmenity _amenity;
+
         public AmenitiesController(IAmenity amenity)
         {
             _amenity = amenity;
@@ -23,16 +26,21 @@ namespace Async_Inn_Management_System.Controllers
 
         // GET: api/Amenities
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Amenity>>> GetAmenities()
+        public async Task<ActionResult<IEnumerable<AmenityDTO>>> GetAmenities()
         {
-            return await _amenity.GetAmenities();
+            return Ok(await _amenity.GetAmenities());
         }
 
         // GET: api/Amenities/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Amenity>> GetAmenity(int id)
+        public async Task<ActionResult<AmenityDTO>> GetAmenity(int id)
         {
             var amenity = await _amenity.GetAmenity(id);
+
+            if (amenity == null)
+            {
+                return NotFound();
+            }
 
             return Ok(amenity);
         }
@@ -40,7 +48,7 @@ namespace Async_Inn_Management_System.Controllers
         // PUT: api/Amenities/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutAmenity(int id, Amenity amenity)
+        public async Task<IActionResult> PutAmenity(int id, AmenityDTO amenity)
         {
             if (id != amenity.ID)
             {
@@ -53,7 +61,7 @@ namespace Async_Inn_Management_System.Controllers
         // POST: api/Amenities
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Amenity>> PostAmenity(Amenity amenity)
+        public async Task<ActionResult<AmenityDTO>> PostAmenity(AmenityDTO amenity)
         {
             await _amenity.CreateAmenity(amenity);
             return CreatedAtAction("GetAmenity", new { id = amenity.ID }, amenity);
@@ -67,6 +75,5 @@ namespace Async_Inn_Management_System.Controllers
             return NoContent();
         }
 
-       
     }
 }
