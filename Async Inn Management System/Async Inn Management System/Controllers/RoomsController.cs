@@ -69,7 +69,20 @@ namespace Async_Inn_Management_System.Controllers
             await _room.DeleteRoom(id);
             return NoContent();
         }
+        [HttpPost]
+        [Route("{roomId}/{amenityId}")]
+        public async Task<IActionResult> AddAmenityToRoom(int roomId, int amenityId)
+        {
+            await _room.AddAmenityToRoom(roomId, amenityId);
+            return NoContent();
+        }
+        [HttpDelete]
+        [Route("{roomId}/{amenityId}")]
+        public async Task<IActionResult> DeleteAmenityFromRoom(int roomId, int amenityId)
+        {
+            await _room.RemoveAmentityFromRoom(roomId, amenityId);
+            return NoContent();
+        }
 
-       
     }
 }

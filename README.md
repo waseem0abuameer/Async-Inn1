@@ -99,3 +99,9 @@ in tis lap i make my first app in Asp core and this my resulets
 
 ## Test Post
 ![](/img/postRoom.png)
+
+==============================================================================================
+## Lab: 14 - Navigation Properties & Routing
+![](/img/Lab14Hotels.png)
+![](/img/Lab14Room.png)
+![](/img/HotelRooms.png)
