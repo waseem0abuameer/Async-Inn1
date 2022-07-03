@@ -9,6 +9,7 @@ using Async_Inn_Management_System.Data;
 using Async_Inn_Management_System.Models;
 using Async_Inn_Management_System.Models.Interfaces;
 using Async_Inn_Management_System.Models.DTOs;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Async_Inn_Management_System.Controllers
 {
@@ -27,6 +28,7 @@ namespace Async_Inn_Management_System.Controllers
 
         // GET: api/HotelRooms
         [HttpGet]
+        [AllowAnonymous]
         public async Task<ActionResult<HotelRoomDTO>> GetHotelRoom()
         {
             return Ok(await _HotelRoom.GetHotelRooms());
@@ -36,6 +38,8 @@ namespace Async_Inn_Management_System.Controllers
 
         // GET: api/HotelRooms/5
         [HttpGet("{roomNumber}")]
+        [AllowAnonymous]
+
         public async Task<ActionResult<IEnumerable<HotelRoomDTO>>> GetHotelRooms(int hotelId, int roomNumber)
         {
             var hotelroom = await _HotelRoom.GetHotelRoom(hotelId, roomNumber);
@@ -51,6 +55,8 @@ namespace Async_Inn_Management_System.Controllers
         // PUT: api/HotelRooms/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{roomNumber}")]
+        [Authorize(Policy = "Update HotelRooms")]
+
         public async Task<IActionResult> PutHotelRoom(HotelRoomDTO hotelRoom)
         {
 
@@ -61,6 +67,8 @@ namespace Async_Inn_Management_System.Controllers
         // POST: api/HotelRooms
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
+        [Authorize(Policy = "Create HotelRooms")]
+
         public async Task<ActionResult<HotelRoomDTO>> PostHotelRoom(HotelRoomDTO hotelRoom)
         {
             return Ok(await _HotelRoom.CreateHotelRoom(hotelRoom));
@@ -68,6 +76,8 @@ namespace Async_Inn_Management_System.Controllers
 
 
         // DELETE: api/HotelRooms/5
+        [Authorize(Policy = "Delete HotelRooms")]
+
         [HttpDelete("{roomNumber}")]
         public async Task<ActionResult<HotelRoom>> DeleteHotelRoom(int hotelid, int roomNumber)
         {
